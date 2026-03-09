@@ -2,13 +2,15 @@
 A meetup for people interested in learning and talking about tech in Ubud, Bali.
 
 ## Next Meetup
-See [2026-03-26.md](/events/2026-03-26.md)
+See [2026-04-09.md](/events/2026-04-09.md)
 
 ## Join our WhatsApp group
-Link:
+<img src="/assets/whatsapp-qr-code.png" width="200">
 
-## Why does this exist?
+https://chat.whatsapp.com/LVtWhe8xGfFFu0qFjp565d?mode=gi_t
+
+## Why does this group exist?
 To meet like-minded Ubudians in tech, share ideas and experiences. If you're in Canggu and don't want to make the drive, check out our friends at [Hackagu](https://hackagu.org/).
 
 ## Who are we?
-Two software engineers who met in Ubud and now live here. [Paul Yun](https://www.linkedin.com/in/yunpaul) and Andrii Novak. Feel free to say Hi on Whatsapp.
+Two software engineers who met in Ubud and now live here. [Paul Yun](https://www.linkedin.com/in/yunpaul) and Andrii Novak. Feel free to say Hi on WhatsApp.
