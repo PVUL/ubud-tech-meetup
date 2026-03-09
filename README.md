@@ -1,15 +1,12 @@
 # Ubud Tech Meetup
-
-<img src="/assets/logo/logo-black-outline-white-bg.png" width="500">
-
 A meetup for people interested in learning and talking about tech in Ubud, Bali.
+<img src="/assets/logo/logo-black-outline-white-bg.png" width="500">
 
 ## Next Meetup
 See [2026-04-09.md](/events/2026-04-09.md)
 
 ## Join our WhatsApp group
 <img src="/assets/whatsapp-qr-code.png" width="200">
-
 https://chat.whatsapp.com/LVtWhe8xGfFFu0qFjp565d?mode=gi_t
 
 ## Why does this group exist?
