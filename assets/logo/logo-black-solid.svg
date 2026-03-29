@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 900 900" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="path1" transform="matrix(6.13719,0,0,5.64354,-154.595,-297.21)">
+        <path d="M96.101,171.459L96.104,171.459L45.181,171.937L45.181,147.653L57.326,147.653L57.326,124.214L69.685,124.214L69.685,100.356L82.15,100.243L82.16,81.829L87.178,76.653C89.937,73.806 93.072,70.566 94.143,69.453L96.091,67.429L96.099,130.98L96.101,171.459Z" style="fill-rule:nonzero;stroke:black;stroke-width:0.64px;"/>
+    </g>
+    <g id="path11" serif:id="path1" transform="matrix(-6.13719,0,0,5.64354,1053.08,-297.21)">
+        <path d="M96.101,171.459L96.104,171.459L45.181,171.937L45.181,147.653L57.326,147.653L57.326,124.214L69.685,124.214L69.685,100.356L82.15,100.243L82.16,81.829L87.178,76.653C89.937,73.806 93.072,70.566 94.143,69.453L96.091,67.429L96.099,130.98L96.101,171.459Z" style="fill-rule:nonzero;stroke:black;stroke-width:0.64px;"/>
+    </g>
+    <g transform="matrix(0.892063,0,0,0.721555,-198.923,-821.489)">
+        <g transform="matrix(0.833061,0,0,1,66.1977,0)">
+            <g transform="matrix(72.8683,0,0,72.8683,727.999,1996.91)">
+            </g>
+            <text x="396.539px" y="1996.91px" style="font-family:'FZLTTHB--B51-0', 'Lantinghei TC', monospace;font-size:72.868px;fill:white;">U<tspan x="487.955px 575.385px 666.801px " y="1996.91px 1996.91px 1996.91px ">BUD</tspan></text>
+        </g>
+    </g>
+    <g transform="matrix(0.899998,0,0,0.721555,135.338,-819.412)">
+        <g transform="matrix(0.833061,0,0,1,66.1977,0)">
+            <g transform="matrix(72.8683,0,0,72.8683,719.459,1996.91)">
+            </g>
+            <text x="396.539px" y="1996.91px" style="font-family:'FZLTTHB--B51-0', 'Lantinghei TC', monospace;font-size:72.868px;fill:white;">T<tspan x="483.116px 565.992px 654.561px " y="1996.91px 1996.91px 1996.91px ">ECH</tspan></text>
+        </g>
+    </g>
+    <g transform="matrix(1.06791,0,0,0.554629,-221.425,-370.703)">
+        <g transform="matrix(0.536836,0,0,1,183.663,0)">
+            <g transform="matrix(82.9494,0,0,82.9494,1236.08,1996.91)">
+            </g>
+            <text x="396.539px" y="1996.91px" style="font-family:'FZLTZHB--B51-0', 'Lantinghei TC', monospace;font-size:82.949px;">M<tspan x="568.205px 718.486px 868.767px 1015.81px 1173.22px " y="1996.91px 1996.91px 1996.91px 1996.91px 1996.91px ">EETUP</tspan></text>
+        </g>
+    </g>
+</svg>
