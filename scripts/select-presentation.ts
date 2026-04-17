@@ -53,7 +53,7 @@ function saveConfig(config: any) {
 // --- File Discovery ---
 
 function formatLabel(label: string, isLastOpened = false): string {
-  if (!label || label === '[CREATE NEW]') return label;
+  if (!label || label === '[CREATE NEW]' || label === '[SEE DEMO]') return label;
   const separator = isLastOpened ? ' - ' : ' / ';
   return label
     .split('/')
@@ -94,6 +94,7 @@ function getAllFiles(dir: string, base: string = ''): { path: string; display: s
     if (item.isDirectory()) {
       results = results.concat(getAllFiles(absPath, relPath));
     } else if (item.name.endsWith('.md')) {
+      if (base === '' && item.name === 'demo.md') continue;
       const meta = getSlidevMetadata(absPath);
       if (meta.isSlidev) {
         results.push({
@@ -136,6 +137,7 @@ function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): T
         items.push(...buildFilteredTree(absPath, allowedPaths, depth + 1));
       }
     } else if (item.name.endsWith('.md')) {
+      if (depth === 0 && item.name === 'demo.md') continue;
       const meta = getSlidevMetadata(absPath);
       if (meta.isSlidev && allowedPaths.has(absPath)) {
         items.push({
@@ -166,7 +168,7 @@ function updateState() {
     ? (path.isAbsolute(lastOpenedPath) ? lastOpenedPath : path.join(process.cwd(), talksDir, lastOpenedPath))
     : null;
 
-  if (!searchText && absLastOpened && fs.existsSync(absLastOpened)) {
+  if (!searchText && absLastOpened && fs.existsSync(absLastOpened) && lastOpenedPath !== 'demo.md') {
     const meta = getSlidevMetadata(absLastOpened);
     // Determine relative path for display: should be person/file
     const rel = path.relative(path.join(process.cwd(), talksDir), absLastOpened).replace('.md', '');
@@ -193,6 +195,7 @@ function updateState() {
 
   items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
   items.push({ title: '[CREATE NEW]', path: 'CREATE_NEW', isDir: false, depth: 0 });
+  items.push({ title: '[SEE DEMO]', path: 'SEE_DEMO', isDir: false, depth: 0 });
 
   if (items.length > 0) {
     if (selectedIndex >= items.length) selectedIndex = items.length - 1;
@@ -284,6 +287,9 @@ async function handleKeypress(chunk: any, key: any) {
     if (selected) {
       if (selected.path === 'CREATE_NEW') {
         if (await createNew()) return;
+      } else if (selected.path === 'SEE_DEMO') {
+        launchSlidev(path.join(process.cwd(), talksDir, 'demo.md'));
+        return;
       } else {
         launchSlidev(selected.path);
         return;
@@ -430,8 +436,10 @@ function launchSlidev(filePath: string) {
   // Save last opened as relative path (excluding 'talks/')
   const config = getConfig();
   const relPath = path.relative(path.join(process.cwd(), talksDir), filePath);
-  config['last-opened-path'] = relPath;
-  saveConfig(config);
+  if (relPath !== 'demo.md') {
+    config['last-opened-path'] = relPath;
+    saveConfig(config);
+  }
 
   process.stdin.removeListener('keypress', handleKeypress);
   process.stdin.removeAllListeners('data');
