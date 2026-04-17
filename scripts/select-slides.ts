@@ -4,8 +4,51 @@ import path from 'node:path';
 import readline from 'node:readline';
 import fuzzysort from 'fuzzysort';
 import chalk from 'chalk';
+import enquirer from 'enquirer';
+// @ts-ignore
+import datePrompt from 'date-prompt';
+// @ts-ignore
+const { Input, Toggle } = enquirer;
 
 const talksDir = 'talks';
+const configFile = '.config.json';
+
+const titleTemplates = [
+  "{name}'s Amazing Talk",
+  "{name}'s Journey from Zero to Hero",
+  "{name} Builds Cool Shit",
+  "Inside {name}'s Tech Stack",
+  "{name} YOLO Deploys on a Friday Afternoon"
+];
+
+function getPlaceholderTitle(speaker: string) {
+  const namePart = speaker.split(/[\s-]+/)[0];
+  const firstName = namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
+  const template = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];
+  return template.replace(/{name}/g, firstName);
+}
+
+function sanitize(str: string): string {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/'/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getConfig() {
+  if (fs.existsSync(configFile)) {
+    try {
+      return JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+    } catch { return {}; }
+  }
+  return {};
+}
+
+function saveConfig(config: any) {
+  fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+}
 
 // --- File Discovery ---
 
@@ -41,7 +84,7 @@ function getSlidevMetadata(filePath: string): { isSlidev: boolean; date?: string
 }
 
 function getAllFiles(dir: string, base: string = ''): { path: string; display: string; date?: string }[] {
-  let results: { path: string; display: string }[] = [];
+  let results: { path: string; display: string; date?: string }[] = [];
   if (!fs.existsSync(dir)) return results;
   const list = fs.readdirSync(dir, { withFileTypes: true });
   for (const item of list) {
@@ -236,24 +279,123 @@ async function handleKeypress(chunk: any, key: any) {
 process.stdin.on('keypress', handleKeypress);
 
 async function createNew(): Promise<boolean> {
+  // Prevent selector keypresses from interfering with the form
+  process.stdin.removeListener('keypress', handleKeypress);
   process.stdin.setRawMode(false);
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  process.stdout.write('\n');
-  const speaker = await new Promise<string>(resolve => rl.question('Speaker name: ', resolve));
-  const name = await new Promise<string>(resolve => rl.question('Talk name: ', resolve));
-  rl.close();
 
-  if (name && speaker) {
-    const target = path.join(talksDir, speaker, name.endsWith('.md') ? name : `${name}.md`);
-    if (!fs.existsSync(target)) {
-      const dir = path.dirname(target);
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(target, '---\ntheme: seriph\n---\n# New Talk');
+  // Clear screen and show form
+  process.stdout.write('\x1B[H\x1B[J');
+
+  const config = getConfig();
+  const defaultPresenter = config['default-presenter-name'] || 'paul-yun';
+
+  try {
+    const speakerPrompt = new Input({
+      message: 'Presenter Name:',
+      initial: defaultPresenter
+    });
+    const speaker = await speakerPrompt.run();
+    if (speaker === undefined) throw new Error('Canceled');
+
+    // Save the new default presenter
+    if (speaker && speaker !== defaultPresenter) {
+      config['default-presenter-name'] = speaker;
+      saveConfig(config);
     }
+
+    const titlePrompt = new Input({
+      message: 'Talk Title:',
+      initial: getPlaceholderTitle(speaker)
+    });
+    const talkName = await titlePrompt.run();
+    if (talkName === undefined) throw new Error('Canceled');
+
+    if (!speaker || !talkName) {
+      throw new Error('Speaker and Talk Name are required');
+    }
+
+    const togglePrompt = new Toggle({
+      message: 'Add Talk Date?',
+      enabled: 'Yes',
+      disabled: 'Skip'
+    });
+    const shouldAddDate = await togglePrompt.run();
+    if (shouldAddDate === undefined) throw new Error('Canceled');
+
+    let dateStr = '';
+    if (shouldAddDate) {
+      process.stdin.setRawMode(false); // Let date-prompt take over
+      const rawDate = await datePrompt('Talk Date');
+
+      const date = new Date(rawDate);
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      dateStr = `${yyyy}-${mm}-${dd}`;
+    }
+
+    const safeSpeaker = sanitize(speaker);
+    const speakerDir = path.join(talksDir, safeSpeaker);
+    if (!fs.existsSync(speakerDir)) {
+      fs.mkdirSync(speakerDir, { recursive: true });
+    }
+
+    // Auto-increment numbering: find the highest number in the directory
+    let nextNum = 1;
+    try {
+      const files = fs.readdirSync(speakerDir);
+      const existingNums = files
+        .map(f => f.match(/^(\d+)-/))
+        .filter((m): m is RegExpMatchArray => m !== null)
+        .map(m => parseInt(m[1], 10));
+
+      if (existingNums.length > 0) {
+        nextNum = Math.max(...existingNums) + 1;
+      }
+    } catch {
+      // Directory might be new or empty
+    }
+
+    const prefix = nextNum.toString().padStart(2, '0');
+    const safeTitle = sanitize(talkName);
+    const filename = `${prefix}-${safeTitle}.md`;
+    const target = path.join(speakerDir, filename);
+
+    const boilerplate = [
+      '---',
+      `theme: seriph`,
+      `title: "${talkName.replace(/"/g, '\\"')}"`,
+      dateStr ? `date: "${dateStr}"` : null,
+      '---',
+      '',
+      `# ${talkName}`,
+      '',
+      `Presented by **${formatLabel(safeSpeaker)}**`,
+      '',
+      '---',
+      '',
+      '# Overview',
+      '',
+      '- Introduction',
+      '- Main Topic',
+      '- Conclusion',
+      '',
+      '---',
+      '',
+      '# Thank You!',
+      '',
+      'Questions?',
+    ].filter(line => line !== null).join('\n');
+
+    fs.writeFileSync(target, boilerplate);
+
     launchSlidev(target);
     return true;
-  } else {
-    process.stdin.setRawMode(true);
+  } catch (err) {
+    // Restore raw mode and re-attach selector keypress listener
+    if (process.stdin.isTTY) process.stdin.setRawMode(true);
+    process.stdin.on('keypress', handleKeypress);
+    render();
     return false;
   }
 }
