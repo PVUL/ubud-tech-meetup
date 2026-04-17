@@ -5,7 +5,7 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
 # apply any unocss classes to the current slide
-class: 'text-center'
+class: "text-center"
 # some information about the slides, markdown enabled
 info: |
   ## Slidev Starter Template
@@ -15,6 +15,7 @@ info: |
 transition: slide-left
 title: Welcome to Slidev
 comark: true
+date: 2026-04-28
 ---
 
 # Welcome to Slidev

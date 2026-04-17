@@ -5,17 +5,38 @@ import readline from 'node:readline';
 import fuzzysort from 'fuzzysort';
 import chalk from 'chalk';
 
-const eventsDir = 'events';
+const talksDir = 'talks';
 
 // --- File Discovery ---
 
-function isSlidevFile(filePath: string): boolean {
+function formatLabel(label: string): string {
+  if (!label || label === '[CREATE NEW]') return label;
+  return label
+    .split('/')
+    .map(part => {
+      const words = part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1));
+      if (words.length > 1 && /^\d+$/.test(words[0])) {
+        return `${words[0]} - ${words.slice(1).join(' ')}`;
+      }
+      return words.join(' ');
+    })
+    .join(' / ');
+}
+
+function getSlidevMetadata(filePath: string): { isSlidev: boolean; date?: string } {
   try {
-    const lines = fs.readFileSync(filePath, 'utf-8').split('\n');
-    const firstLine = lines[0] || '';
-    return firstLine.trim().startsWith('---');
+    const content = fs.readFileSync(filePath, 'utf-8');
+    if (!content.trim().startsWith('---')) return { isSlidev: false };
+    
+    // Frontmatter is usually between the first and second '---'
+    const parts = content.split('---');
+    if (parts.length < 3) return { isSlidev: true };
+    const frontmatter = parts[1];
+    
+    const dateMatch = frontmatter.match(/date:\s*["']?([^"'\n\r]+)["']?/i);
+    return { isSlidev: true, date: dateMatch ? dateMatch[1].trim() : undefined };
   } catch {
-    return false;
+    return { isSlidev: false };
   }
 }
 
@@ -28,8 +49,11 @@ function getAllFiles(dir: string, base: string = ''): { path: string; display: s
     const absPath = path.join(dir, item.name);
     if (item.isDirectory()) {
       results = results.concat(getAllFiles(absPath, relPath));
-    } else if (item.name.endsWith('.md') && isSlidevFile(absPath)) {
-      results.push({ path: absPath, display: relPath.replace('.md', '') });
+    } else if (item.name.endsWith('.md')) {
+      const meta = getSlidevMetadata(absPath);
+      if (meta.isSlidev) {
+        results.push({ path: absPath, display: relPath.replace('.md', '') });
+      }
     }
   }
   return results;
@@ -41,6 +65,7 @@ interface TreeItem {
   isDir: boolean;
   isSpacer?: boolean;
   depth: number;
+  date?: string;
 }
 
 function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): TreeItem[] {
@@ -61,8 +86,17 @@ function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): T
         items.push({ title: item.name, path: absPath, isDir: true, depth });
         items.push(...buildFilteredTree(absPath, allowedPaths, depth + 1));
       }
-    } else if (item.name.endsWith('.md') && allowedPaths.has(absPath)) {
-      items.push({ title: item.name.replace('.md', ''), path: absPath, isDir: false, depth });
+    } else if (item.name.endsWith('.md')) {
+      const meta = getSlidevMetadata(absPath);
+      if (meta.isSlidev && allowedPaths.has(absPath)) {
+        items.push({ 
+          title: item.name.replace('.md', ''), 
+          path: absPath, 
+          isDir: false, 
+          depth,
+          date: meta.date 
+        });
+      }
     }
   }
   return items;
@@ -73,16 +107,16 @@ function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): T
 let searchText = '';
 let selectedIndex = 0;
 let items: TreeItem[] = [];
-const allFilesIndex = getAllFiles(eventsDir);
+const allFilesIndex = getAllFiles(talksDir);
 
 function updateState() {
   if (searchText) {
     const results = fuzzysort.go(searchText, allFilesIndex, { key: 'display', limit: 50 });
     const matchPaths = new Set(results.map(res => res.obj.path));
-    items = buildFilteredTree(eventsDir, matchPaths);
+    items = buildFilteredTree(talksDir, matchPaths);
   } else {
     const allPaths = new Set(allFilesIndex.map(f => f.path));
-    items = buildFilteredTree(eventsDir, allPaths);
+    items = buildFilteredTree(talksDir, allPaths);
   }
 
   items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
@@ -133,11 +167,14 @@ function render() {
     const indent = '  '.repeat(renderDepth);
 
     if (item.isDir) {
-      process.stdout.write(`${indent}${chalk.white(item.title)}\n`);
+      process.stdout.write(`${indent}${chalk.white(formatLabel(item.title))}\n`);
     } else {
       const cursor = i === selectedIndex ? chalk.cyan('❯ ') : '  ';
-      const text = i === selectedIndex ? chalk.cyan(item.title) : chalk.white(item.title);
-      process.stdout.write(`${indent}${cursor}${text}\n`);
+      const formattedTitle = formatLabel(item.title);
+      const dateStr = item.date ? chalk.gray(` (${item.date})`) : '';
+      const line = `${indent}${cursor}${formattedTitle}${dateStr}`;
+      
+      process.stdout.write(i === selectedIndex ? chalk.cyan(line) + '\n' : line + '\n');
     }
   });
 }
@@ -197,11 +234,12 @@ async function createNew(): Promise<boolean> {
   process.stdin.setRawMode(false);
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   process.stdout.write('\n');
+  const speaker = await new Promise<string>(resolve => rl.question('Speaker name: ', resolve));
   const name = await new Promise<string>(resolve => rl.question('Talk name: ', resolve));
   rl.close();
   
-  if (name) {
-    const target = path.join(eventsDir, name.endsWith('.md') ? name : `${name}.md`);
+  if (name && speaker) {
+    const target = path.join(talksDir, speaker, name.endsWith('.md') ? name : `${name}.md`);
     if (!fs.existsSync(target)) {
       const dir = path.dirname(target);
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
