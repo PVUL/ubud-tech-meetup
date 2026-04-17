@@ -1,10 +1,10 @@
 # Talks
 
-`talks` contains slides used for tech talks at Ubud Tech Meetup. It's purpose is to consistently create and run presentations for the meetup. Slides are built using [Slidev](https://sli.dev/). If you want to create slides, we recommend using the [Slidev VS Code Extension](https://sli.dev/features/vscode-extension).
+`talks` contains slides used for tech talks at Ubud Tech Meetup. Slides are built using [Slidev](https://sli.dev/). If you want to create slides, we recommend using the [Slidev VS Code Extension](https://sli.dev/features/vscode-extension).
 
 ## Running the Interactive Selector
 
-We built a custom interactive TUI (Terminal User Interface), so it is easy to navigate through past presentations and create new ones.
+We built a [custom interactive TUI](../scripts/select-presentation.ts) (Terminal User Interface), to make it easy to navigate through past talks and create new ones.
 
 ### Prerequisites
 
