@@ -15,3 +15,7 @@ To meet like-minded Ubudians in tech, share ideas and experiences. If you're in 
 
 ## Who are we?
 Two software engineers who met in Ubud and now call it home. [Paul Yun](https://www.linkedin.com/in/yunpaul) and Andrii Novak. Feel free to say Hi on WhatsApp.
+
+---
+
+This repo contains tech talk slides and can be run locally using `bun dev`. Read more [here](/talks/README.md).
