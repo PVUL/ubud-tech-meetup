@@ -83,9 +83,10 @@ function updateState() {
   } else {
     const allPaths = new Set(allFilesIndex.map(f => f.path));
     items = buildFilteredTree(eventsDir, allPaths);
-    items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
-    items.push({ title: '[CREATE NEW]', path: 'CREATE_NEW', isDir: false, depth: 0 });
   }
+
+  items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
+  items.push({ title: '[CREATE NEW]', path: 'CREATE_NEW', isDir: false, depth: 0 });
 
   if (items.length > 0) {
     if (selectedIndex >= items.length) selectedIndex = items.length - 1;
@@ -114,9 +115,8 @@ function updateState() {
 }
 
 function render() {
-  process.stdout.write('\x1B[2J\x1B[H');
-  process.stdout.write(chalk.white(`Select presentation (Type to search): `) + chalk.cyan(searchText) + '\n');
-  process.stdout.write('---------------------------------------------------\n');
+  process.stdout.write('\x1B[H\x1B[J');
+  process.stdout.write(chalk.white(`Select presentation (Type to search): `) + chalk.cyan(searchText) + '\n\n');
 
   if (items.length === 0) {
     process.stdout.write(chalk.gray('  No matches found.\n'));
@@ -147,7 +147,7 @@ function render() {
 readline.emitKeypressEvents(process.stdin);
 if (process.stdin.isTTY) process.stdin.setRawMode(true);
 
-process.stdin.on('keypress', async (chunk, key) => {
+async function handleKeypress(chunk: any, key: any) {
   if (key && key.ctrl && key.name === 'c') {
     process.exit(0);
   }
@@ -172,9 +172,10 @@ process.stdin.on('keypress', async (chunk, key) => {
     const selected = items[selectedIndex];
     if (selected) {
       if (selected.path === 'CREATE_NEW') {
-        await createNew();
+        if (await createNew()) return;
       } else {
         launchSlidev(selected.path);
+        return;
       }
     }
   } else if (key.name === 'backspace') {
@@ -188,9 +189,11 @@ process.stdin.on('keypress', async (chunk, key) => {
   }
   
   render();
-});
+}
 
-async function createNew() {
+process.stdin.on('keypress', handleKeypress);
+
+async function createNew(): Promise<boolean> {
   process.stdin.setRawMode(false);
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   process.stdout.write('\n');
@@ -205,19 +208,22 @@ async function createNew() {
       fs.writeFileSync(target, '---\ntheme: seriph\n---\n# New Talk');
     }
     launchSlidev(target);
+    return true;
   } else {
     process.stdin.setRawMode(true);
-    render();
+    return false;
   }
 }
 
 function launchSlidev(filePath: string) {
+  process.stdin.removeListener('keypress', handleKeypress);
+  process.stdin.removeAllListeners('data');
+  process.stdin.pause();
   process.stdin.setRawMode(false);
-  process.stdout.write('\x1B[2J\x1B[H');
-  console.log(`Launching: ${filePath}\n`);
+  process.stdout.write('\x1B[H\x1B[J');
   
   const slidevBin = path.join(process.cwd(), 'node_modules', '.bin', 'slidev');
-  const child = spawn(slidevBin, [filePath], { stdio: 'inherit', shell: true });
+  const child = spawn(slidevBin, [filePath], { stdio: 'inherit' });
   
   child.on('exit', () => process.exit(0));
 }

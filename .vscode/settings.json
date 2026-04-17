@@ -1,0 +1,6 @@
+{
+  "slidev.include": [
+    "**/slides.md",
+    "events/2026-04-28/vibe-engineering-paul-yun.md"
+  ]
+}
