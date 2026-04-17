@@ -52,8 +52,9 @@ function saveConfig(config: any) {
 
 // --- File Discovery ---
 
-function formatLabel(label: string): string {
+function formatLabel(label: string, isLastOpened = false): string {
   if (!label || label === '[CREATE NEW]') return label;
+  const separator = isLastOpened ? ' - ' : ' / ';
   return label
     .split('/')
     .map(part => {
@@ -63,7 +64,7 @@ function formatLabel(label: string): string {
       }
       return words.join(' ');
     })
-    .join(' / ');
+    .join(separator);
 }
 
 function getSlidevMetadata(filePath: string): { isSlidev: boolean; date?: string } {
@@ -111,6 +112,7 @@ interface TreeItem {
   path: string;
   isDir: boolean;
   isSpacer?: boolean;
+  isLastOpened?: boolean;
   depth: number;
   date?: string;
 }
@@ -157,13 +159,36 @@ let items: TreeItem[] = [];
 const allFilesIndex = getAllFiles(talksDir);
 
 function updateState() {
+  items = [];
+  const config = getConfig();
+  const lastOpenedPath = config['last-opened-path'];
+  const absLastOpened = lastOpenedPath
+    ? (path.isAbsolute(lastOpenedPath) ? lastOpenedPath : path.join(process.cwd(), talksDir, lastOpenedPath))
+    : null;
+
+  if (!searchText && absLastOpened && fs.existsSync(absLastOpened)) {
+    const meta = getSlidevMetadata(absLastOpened);
+    // Determine relative path for display: should be person/file
+    const rel = path.relative(path.join(process.cwd(), talksDir), absLastOpened).replace('.md', '');
+
+    items.push({
+      title: rel,
+      path: absLastOpened,
+      isDir: false,
+      isLastOpened: true,
+      depth: 0,
+      date: meta.date
+    });
+    items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
+  }
+
   if (searchText) {
     const results = fuzzysort.go(searchText, allFilesIndex, { keys: ['display', 'date'], limit: 50 });
     const matchPaths = new Set(results.map(res => res.obj.path));
-    items = buildFilteredTree(talksDir, matchPaths);
+    items.push(...buildFilteredTree(talksDir, matchPaths));
   } else {
     const allPaths = new Set(allFilesIndex.map(f => f.path));
-    items = buildFilteredTree(talksDir, allPaths);
+    items.push(...buildFilteredTree(talksDir, allPaths));
   }
 
   items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
@@ -217,9 +242,10 @@ function render() {
       process.stdout.write(`${indent}${chalk.white(formatLabel(item.title))}\n`);
     } else {
       const cursor = i === selectedIndex ? chalk.cyan('❯ ') : '  ';
-      const formattedTitle = formatLabel(item.title);
+      const formattedTitle = formatLabel(item.title, item.isLastOpened);
       const dateStr = item.date ? chalk.gray(` (${item.date})`) : '';
-      const line = `${indent}${cursor}${formattedTitle}${dateStr}`;
+      const prefix = item.isLastOpened ? chalk.yellow('[LAST OPENED] ') : '';
+      const line = `${indent}${cursor}${prefix}${formattedTitle}${dateStr}`;
 
       process.stdout.write(i === selectedIndex ? chalk.cyan(line) + '\n' : line + '\n');
     }
@@ -401,6 +427,12 @@ async function createNew(): Promise<boolean> {
 }
 
 function launchSlidev(filePath: string) {
+  // Save last opened as relative path (excluding 'talks/')
+  const config = getConfig();
+  const relPath = path.relative(path.join(process.cwd(), talksDir), filePath);
+  config['last-opened-path'] = relPath;
+  saveConfig(config);
+
   process.stdin.removeListener('keypress', handleKeypress);
   process.stdin.removeAllListeners('data');
   process.stdin.pause();

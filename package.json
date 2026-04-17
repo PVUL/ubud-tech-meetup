@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "bun scripts/select-slides.ts",
+    "dev": "bun scripts/select-presentation.ts",
     "build": "slidev build",
     "export": "slidev export"
   },
