@@ -53,7 +53,7 @@ function saveConfig(config: any) {
 // --- File Discovery ---
 
 function formatLabel(label: string, isLastOpened = false): string {
-  if (!label || label === '[CREATE NEW]' || label === '[SEE DEMO]') return label;
+  if (!label || label === '[NEW TALK]' || label === '[SEE DEMO]') return label;
   const separator = isLastOpened ? ' - ' : ' / ';
   return label
     .split('/')
@@ -194,7 +194,7 @@ function updateState() {
   }
 
   items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
-  items.push({ title: '[CREATE NEW]', path: 'CREATE_NEW', isDir: false, depth: 0 });
+  items.push({ title: '[NEW TALK]', path: 'CREATE_NEW', isDir: false, depth: 0 });
   items.push({ title: '[SEE DEMO]', path: 'SEE_DEMO', isDir: false, depth: 0 });
 
   if (items.length > 0) {

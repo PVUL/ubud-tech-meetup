@@ -31,7 +31,7 @@ Select Presentation (type to search):
 Paul Yun
   01 - Vibe Engineering (2026-04-28)
 
-  [CREATE NEW]
+  [NEW TALK]
 ```
 
 - **Fuzzy Search**: Search by presenter, talk title, or even **dates** (e.g., typing `2026` will show all talks from 2026).
@@ -40,7 +40,7 @@ Paul Yun
 
 ## 2. Creating a New Talk
 
-Selecting `[CREATE NEW]` starts an automated workflow to set up your slides. 
+Selecting `[NEW TALK]` starts an automated workflow to set up your slides. 
 
 ### Interactive Prompts
 
