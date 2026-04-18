@@ -8,35 +8,49 @@ background: https://cover.sli.dev
 class: "text-center"
 # some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## Vibe Engineering
+  Vibe code like an engineer by Paul Yun
 
-  Learn more at [Sli.dev](https://sli.dev)
 transition: slide-left
-title: Welcome to Slidev
+title: Vibe Engineering
 comark: true
 date: 2026-04-28
 ---
 
-# Welcome to Slidev
+# Ubud Tech Meetup
+Tuesday, April 28, 2026
 
-Presentation slides for developers
+## _Welcome to our 2nd meetup!_
+|     |                        |
+|----:|:-----------------------|
+|6:00 | Networking + Food      |
+|6:45 | About Ubud Tech Meetup |
+|7:00 | Tech Talk              |
+|7:30 | Networking             |
 
-<div class="pt-12">
+<!-- <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" flex="~ justify-center items-center gap-2" hover="bg-white bg-opacity-10">
     Press Space for next page <div class="i-carbon:arrow-right inline-block"/>
   </span>
-</div>
+</div> -->
 
 <div class="abs-br m-6 flex gap-2">
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <div class="i-carbon:edit" />
   </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
 </div>
+
+<style>
+h2 {
+  color: lightgrey;
+  
+}
+
+table {
+  width: 17rem;
+  margin: 0 auto;
+}
+</style>
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
@@ -46,28 +60,22 @@ The last comment block of each slide will be treated as slide notes. It will be 
 transition: fade-out
 ---
 
-# What is Slidev?
+# About Ubud Tech Meetup
 
-Slidev is a slide maker and accompanying presentation tool designed for developers. It consists of the following features:
+(Talk about the purpose of Ubud Tech Meetup - "to share and educate")
 
-- 📝 **Text-based** - focus on the content with Markdown, and apply styles later
-- 🎨 **Themable** - themes can be shared and used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your slides
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
+- Who we are
+- Why this meetup started (maybe get community involvement)
+- Who is it for? (both developers and non-developers - but we want to stay true to our developer roots, while still being accessible to non-developers)
+- github/whatsapp
 
-<br>
-<br>
-
-Read more about Slidev in [Why Slidev?](https://sli.dev/guide/why)
+<!-- Read more about Slidev in [Why Slidev?](https://sli.dev/guide/why) -->
 
 <!--
 You can have `style` tags in markdown to override the style for the current page.
 Learn more: https://sli.dev/guide/syntax#embedded-styles
 -->
-
+<!-- 
 <style>
 h1 {
   background-color: #2B90B6;
@@ -79,59 +87,99 @@ h1 {
   -moz-text-fill-color: transparent;
 }
 </style>
+ -->
 
 <!--
 Here is another comment.
 -->
 
 ---
-layout: default
----
-
-# Table of contents
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-<Toc maxDepth="1"></Toc>
-
----
 transition: slide-up
 level: 2
 ---
 
-# Navigation
+# What To Expect From Us
 
-Hover on the bottom-left corner to see the navigation's control panel, [learn more](https://sli.dev/guide/navigation.html)
+(should ask what the audience expectations of the group is)
 
-## Keyboard Shortcuts
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden"> 
 
+- share and educate
+
+</div>
+
+<div v-after class="v-afters">
+
+- networking
+- tech talks
+- work on community projects together (for learning, fun, and building the community)
+
+</div>
+
+<style>
+.slidev-vclick-target {
+  transition: all 700ms ease-in-out;
+}
+
+/* v-afters container logic */
+.v-afters li {
+  opacity: 0;
+  transition: all 700ms ease-in-out;
+}
+
+.v-afters:not(.slidev-vclick-hidden) li {
+  opacity: 1;
+}
+
+/* Automatic staggering for up to 10 items (Forward only) */
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(1) { transition-delay: 700ms !important; }
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(2) { transition-delay: 1400ms !important; }
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(3) { transition-delay: 2100ms !important; }
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(4) { transition-delay: 2800ms !important; }
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(5) { transition-delay: 3500ms !important; }
+.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(6) { transition-delay: 4200ms !important; }
+
+/* Instant reset when going backward */
+.slidev-nav-go-backward .v-afters li {
+  transition-delay: 0ms !important;
+}
+</style>
+
+<!-- Hover on the bottom-left corner to see the navigation's control panel, [learn more](https://sli.dev/guide/navigation.html) -->
+
+<!-- ## Keyboard Shortcuts -->
+<!-- 
 |     |     |
 | --- | --- |
 | <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
 | <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
 | <kbd>up</kbd> | previous slide |
 | <kbd>down</kbd> | next slide |
-
+ -->
 <!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
+<!-- <img
   v-click
   class="absolute -bottom-9 -left-7 w-80 opacity-50"
   src="https://sli.dev/assets/arrow-bottom-left.svg"
   alt=""
-/>
+/> -->
+
+<!--
 <p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+-->
 
 ---
-layout: image-right
+# layout: image-right
 image: https://cover.sli.dev
 ---
 
-# Code
+# Code of conduct
 
-Use code snippets and get automatic highlighting, and even types hover![^1]
+- Code of conduct / values
 
+
+<!-- Use code snippets and get automatic highlighting, and even types hover![^1] -->
+<!-- 
 ```ts {all|5|7|7-8|10|all} twoslash
 // TwoSlash enables TypeScript hover information
 // and errors in markdown code blocks
@@ -144,14 +192,14 @@ const doubled = computed(() => count.value * 2)
 
 doubled.value = 2
 ```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+ -->
+<!-- <arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" /> -->
 
 <!-- This allow you to embed external code blocks -->
 <!-- <<< @/snippets/external.ts#snippet -->
 
 <!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
+<!-- [^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting) -->
 
 <!-- Inline style -->
 <style>
@@ -168,35 +216,42 @@ doubled.value = 2
 
 ---
 
-# Components
+# Call for community tech talks
+Call for community members to give talks (reach out to Paul)
 
+show qr code (google form) - also to share in whatsapp.
+
+(should mention the process of submitting a talk, and the 2 talk formats, 15 min tech talk or 60 min workshop)
+
+
+<!-- 
 <div grid="~ cols-2 gap-4">
-<div>
+<div> -->
 
-You can use Vue components directly inside your slides.
+<!-- You can use Vue components directly inside your slides.
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. Adding your own custom components is also super easy.
-
+We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. Adding your own custom components is also super easy. -->
+<!-- 
 ```html
 <Counter :count="10" />
 ```
-
+ -->
 <!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
+<!-- <Counter :count="10" m="t-4" /> -->
 
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
+<!-- Check out [the guides](https://sli.dev/builtin/components.html) for more. -->
 
-</div>
-<div>
+<!-- </div> -->
+<!-- <div>
 
 ```html
 <Tweet id="1390115482657726468" />
 ```
+ -->
+<!-- <Tweet id="1390115482657726468" scale="0.65" /> -->
 
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!--
 Presenter notes with **bold**, *italic*, and ~~strike~~ text.
@@ -212,12 +267,12 @@ Also, HTML elements are valid:
 class: px-20
 ---
 
-# Themes
+# Thank you. And now to move on to the talk.
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switch between themes on a per-slide basis with just **one change** in your frontmatter:
+<!-- Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switch between themes on a per-slide basis with just **one change** in your frontmatter: -->
 
-<div grid="~ cols-2 gap-2" m="t-2">
-
+<!-- <div grid="~ cols-2 gap-2" m="t-2"> -->
+<!-- 
 ```yaml
 ---
 theme: default
@@ -229,24 +284,26 @@ theme: default
 theme: seriph
 ---
 ```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
+ -->
+<!-- <img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
 
 <img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
 
-</div>
+</div> -->
 
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
+<!-- Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and -->
+<!-- check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery). -->
 
 ---
 preload: false
 ---
 
-# Animations
+# Vibe Engineering, Paul Yun (Tech Talk)
 
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
+Welcome to the tech talk. 
 
+<!-- Animations are powered by [@vueuse/motion](https://motion.vueuse.org/). -->
+<!-- 
 ```html
 <div
   v-motion
@@ -255,8 +312,8 @@ Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
   Slidev
 </div>
 ```
-
-<div class="w-60 relative mt-6">
+ -->
+<!-- <div class="w-60 relative mt-6">
   <div class="relative w-40 h-40">
     <img
       v-motion
@@ -291,7 +348,7 @@ Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
     :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
     Slidev
   </div>
-</div>
+</div> -->
 
 <!-- vue script setup scripts can be directly used in markdown, and will only affect the current page -->
 <script setup lang="ts">
@@ -322,12 +379,12 @@ const final = {
 
 # LaTeX
 
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
+<!-- LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/). -->
 
-<br>
+<!-- <br> -->
 
-Inline $\sqrt{3x-1}+(1+x)^2$
-
+<!-- Inline $\sqrt{3x-1}+(1+x)^2$ -->
+<!-- 
 Block
 $$ {1|3|all}
 \begin{array}{c}
@@ -344,7 +401,7 @@ $$
 
 <br>
 
-[Learn more](https://sli.dev/guide/syntax#latex)
+[Learn more](https://sli.dev/guide/syntax#latex) -->
 
 ---
 
