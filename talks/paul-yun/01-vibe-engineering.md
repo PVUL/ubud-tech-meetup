@@ -17,6 +17,14 @@ comark: true
 date: 2026-04-28
 ---
 
+<script setup lang="ts">
+import Timer from '../../components/Timer.vue'
+</script>
+
+<div class="abs-tr m-6">
+  <Timer title="Networking" />
+</div>
+
 # Ubud Tech Meetup
 Tuesday, April 28, 2026
 
@@ -34,11 +42,6 @@ Tuesday, April 28, 2026
   </span>
 </div> -->
 
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <div class="i-carbon:edit" />
-  </button>
-</div>
 
 <style>
 h2 {
