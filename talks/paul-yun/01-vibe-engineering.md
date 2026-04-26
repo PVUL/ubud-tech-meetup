@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
+background: https://cdn.jsdelivr.net/gh/slidevjs/slidev-covers@main/static/4Zfx5NRt8pM.webp
 # apply any unocss classes to the current slide
 class: "text-center"
 # some information about the slides, markdown enabled
@@ -12,23 +12,24 @@ info: |
   Vibe code like an engineer by Paul Yun
 
 transition: slide-left
-title: Vibe Engineering
+title: Welcome
 comark: true
 date: 2026-04-28
 ---
 
 <script setup lang="ts">
 import Timer from '../../components/Timer.vue'
+import MeetupLogo from '../../components/MeetupLogo.vue'
 </script>
 
 <div class="abs-tr m-6">
   <Timer title="Networking" />
 </div>
 
-# Ubud Tech Meetup
-Tuesday, April 28, 2026
+<MeetupLogo />
+<!-- **Tuesday, April 28, 2026** -->
 
-## _Welcome to our 2nd meetup!_
+#### _Welcome to our 2nd meetup!_
 |     |                        |
 |----:|:-----------------------|
 |6:00 | Networking + Food      |
@@ -36,17 +37,11 @@ Tuesday, April 28, 2026
 |7:00 | Tech Talk              |
 |7:30 | Networking             |
 
-<!-- <div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" flex="~ justify-center items-center gap-2" hover="bg-white bg-opacity-10">
-    Press Space for next page <div class="i-carbon:arrow-right inline-block"/>
-  </span>
-</div> -->
-
+<br /><i>— Sponsored by Nhost —</i>
 
 <style>
 h2 {
   color: lightgrey;
-  
 }
 
 table {
@@ -55,15 +50,18 @@ table {
 }
 </style>
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
 ---
 transition: fade-out
+class: text-center
 ---
 
+<script setup lang="ts">
+import Image from '../../components/Image.vue'
+</script>
+
 # About Ubud Tech Meetup
+
+<Image src="/photos/2026-04-07.jpg" width="400" />
 
 (Talk about the purpose of Ubud Tech Meetup - "to share and educate")
 
@@ -72,29 +70,6 @@ transition: fade-out
 - Who is it for? (both developers and non-developers - but we want to stay true to our developer roots, while still being accessible to non-developers)
 - github/whatsapp
 
-<!-- Read more about Slidev in [Why Slidev?](https://sli.dev/guide/why) -->
-
-<!--
-You can have `style` tags in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-<!-- 
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
- -->
-
-<!--
-Here is another comment.
--->
 
 ---
 transition: slide-up
@@ -148,74 +123,15 @@ level: 2
 }
 </style>
 
-<!-- Hover on the bottom-left corner to see the navigation's control panel, [learn more](https://sli.dev/guide/navigation.html) -->
-
-<!-- ## Keyboard Shortcuts -->
-<!-- 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
- -->
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<!-- <img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/> -->
-
-<!--
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
--->
 
 ---
-# layout: image-right
-image: https://cover.sli.dev
+layout: default
 ---
 
 # Code of conduct
 
 - Code of conduct / values
 
-
-<!-- Use code snippets and get automatic highlighting, and even types hover![^1] -->
-<!-- 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
- -->
-<!-- <arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" /> -->
-
-<!-- This allow you to embed external code blocks -->
-<!-- <<< @/snippets/external.ts#snippet -->
-
-<!-- Footer -->
-<!-- [^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting) -->
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
 
 ---
 
@@ -226,269 +142,281 @@ show qr code (google form) - also to share in whatsapp.
 
 (should mention the process of submitting a talk, and the 2 talk formats, 15 min tech talk or 60 min workshop)
 
-
-<!-- 
-<div grid="~ cols-2 gap-4">
-<div> -->
-
-<!-- You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. Adding your own custom components is also super easy. -->
-<!-- 
-```html
-<Counter :count="10" />
-```
- -->
-<!-- ./components/Counter.vue -->
-<!-- <Counter :count="10" m="t-4" /> -->
-
-<!-- Check out [the guides](https://sli.dev/builtin/components.html) for more. -->
-
-<!-- </div> -->
-<!-- <div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
- -->
-<!-- <Tweet id="1390115482657726468" scale="0.65" /> -->
-
-<!-- </div> -->
-<!-- </div> -->
-
-<!--
-Presenter notes with **bold**, *italic*, and ~~strike~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
 ---
 class: px-20
+layout: center
+title: Thank you
 ---
 
-# Thank you. And now to move on to the talk.
-
-<!-- Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switch between themes on a per-slide basis with just **one change** in your frontmatter: -->
-
-<!-- <div grid="~ cols-2 gap-2" m="t-2"> -->
-<!-- 
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
- -->
-<!-- <img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div> -->
-
-<!-- Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and -->
-<!-- check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery). -->
-
----
-preload: false
----
-
-# Vibe Engineering, Paul Yun (Tech Talk)
-
-Welcome to the tech talk. 
-
-<!-- Animations are powered by [@vueuse/motion](https://motion.vueuse.org/). -->
-<!-- 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
+<div text-align="center">
+  <h1>Thank you.</h1><br />
+  <h3 color="gray" italic>And now to for main talk...</h3>
 </div>
-```
- -->
-<!-- <div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
 
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div> -->
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affect the current page -->
+---
+layout: cover
+background: https://cdn.jsdelivr.net/gh/slidevjs/slidev-covers@main/static/ahX1sknMGhg.webp 
+title: "Tech Talk: Vibe Engineering"
+---
+
+<h1>Vibe Engineering</h1>
+<h2>Beyond Vibe Coding</h2>
+
+<br />
+
+<p italic>
+  Paul Yun — April 28, 2026
+</p>
+
+
+---
+layout: two-cols
+title: About Me
+---
+
+
+<h2 class="ml-17">Hi, I'm Paul Yun.</h2><br /><br />
+<img class="m-auto" src="/assets/01-vibe-engineering-1.JPG" width="300"><br />
+
+::right::
+
+<br /><br /><br />
+
+- Software Engineer for 10 years at Wayfair, Almanac, Kaiber
+- Taught at UCLA, edX Bootcamps, Nucamp
+- From Philadelphia + I love skateboarding 🛹
+
 <script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
+import SocialHandle from '../../components/SocialHandle.vue'
 </script>
 
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
+<br /><br />
+<SocialHandle type="linkedin" url="linkedin.com/in/yunpaul" />
+<SocialHandle type="github" url="github.com/PVUL" />
 
 ---
+layout: center
+transition: fade-out
+---
 
-# LaTeX
+# Goal of this talk
 
-<!-- LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/). -->
+## _Shift your approach on vibe coding projects_
 
-<!-- <br> -->
+---
+layout: center
+transition: fade-out
+---
 
-<!-- Inline $\sqrt{3x-1}+(1+x)^2$ -->
+# Why?
+
+Because without a proper approach: 
+- Vibe coding can limit the complexity of what you can build
+- You'll likely spend more time and tokens re-iterating
+- It becomes easy to lose focus of original intent
+
+
+---
+layout: center
+---
+
+## So how can we apply concepts from **_engineering_**?
+
 <!-- 
-Block
-$$ {1|3|all}
-\begin{array}{c}
+* Building with AI using an engineering mindset
+* Structured, not reactive
+* Focused on systems that last -->
 
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+<!-- 
+- It's using the approach of vibe coding, but with a systematic engineering approach.
+- Why? 
+  - (1) it allows you to have better consistency over the quality of outputs. 
+  - (2) it allows you to build more complex systems.
 
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
 
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex) -->
+- STEPS
+  - Clarify the specs
+    - research (libraries, frameworks, etc)
+    - design (UI, UX, architecture, etc)
+    - create a clear prompt
+  - Verify the implementation plan
+    - implement
+    - test
+  - Add documentation
+    - this provides context for future development (human or non-human) -->
 
 ---
 
-# Diagrams
+# Mental Model Shift
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+<div class="h-100 w-full px-10 mt-12 flex flex-col transition-all duration-700">
+  <!-- Before Section -->
+  <div class="before-row flex items-center gap-8 flex-1 transition-all duration-700 min-h-0">
+    <div class="w-32 text-xs font-medium uppercase tracking-[0.2em] opacity-40 text-right leading-tight">
+      Traditional <br /> + Vibe Coding
+    </div>
+    <div class="flex-1 h-full flex rounded-xl overflow-hidden border border-slate-300 bg-slate-50 shadow-sm">
+      <div class="flex items-center justify-center bg-slate-700 text-white border-r border-white/10" style="width: 12%">
+        <span class="text-[9px] uppercase tracking-[0.2em]">Planning</span>
+      </div>
+      <div class="flex items-center justify-center bg-slate-500 text-white border-r border-white/10" style="width: 78%">
+        <span class="text-sm uppercase tracking-[0.3em]">Implementation</span>
+      </div>
+      <div class="flex items-center justify-center bg-slate-200 text-slate-900" style="width: 10%">
+        <span class="text-[9px] uppercase tracking-[0.2em]">Review</span>
+      </div>
+    </div>
+  </div>
 
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectivness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
+  <!-- After Section -->
+  <div v-click class="after-row flex items-center gap-8 transition-all duration-700 overflow-hidden min-h-0" style="flex: 0; opacity: 0;">
+    <div class="w-32 text-xs font-medium uppercase tracking-[0.2em] text-primary text-right leading-tight">
+      Vibe <br /> Engineering
+    </div>
+    <div class="flex-1 h-full flex rounded-xl overflow-hidden border border-slate-300 bg-slate-50 shadow-sm">
+      <div class="flex items-center justify-center bg-slate-700 text-white border-r border-white/10" style="width: 40%">
+        <span class="text-sm uppercase tracking-[0.2em]">Planning</span>
+      </div>
+      <div class="flex items-center justify-center bg-slate-500 text-white border-r border-white/10" style="width: 20%">
+        <span class="text-[9px] uppercase tracking-[0.2em]">Implementation</span>
+      </div>
+      <div class="flex items-center justify-center bg-slate-200 text-slate-900" style="width: 40%">
+        <span class="text-sm uppercase tracking-[0.2em]">Review</span>
+      </div>
+    </div>
+  </div>
 </div>
 
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+<style>
+.after-row:not(.slidev-vclick-hidden) {
+  flex: 1 !important;
+  opacity: 1 !important;
+  margin-top: 2rem;
+}
+.before-row:has(~ .after-row:not(.slidev-vclick-hidden)) {
+  flex: 1 !important;
+}
+</style>
+
+
+---
+layout: center
+---
+
+<!-- # What can do better. (the shift) -->
+
+<!-- we're in a mad dash to finish quickly because it feels good. but when it's not done right, we actually spend more time fixing it. -->
+
+_The approach._
+
+## "Measure twice, cut once"
+
+
+---
+
+# Vibe Engineering Workflow
+
+- 1. Plan
+  - 1.1 Clarify the spec
+  - 1.2 Create plan
+
+<br />
+
+- 2. Implement
+  - 2.1 Implementation tasks
+  - 2.2 Debug
+
+<br />
+
+- 3. Review
+  - 3.1 Test
+  - 3.2 Document
+
+---
+
+# workflow overview: clarify spec
+
+---
+
+# workflow overview: plan
+
+---
+
+# workflow overview: implement
+
+---
+
+# workflow overview: debug
+
+---
+
+# workflow overview: document
+
+---
+
+# Here's my project (real world example)
+
+## Aspire.you
+
+- general overview of the project
+  - why
+  - what is the stack
+
+---
+
+# Demo time
+
+(next 3-4 slides for walk thru of how it was built)
+
+---
+
+# if i vibe coded this without specs
+
+(show screenshot of prompt)
+
+
+---
+
+# Result
+
+This allows for more complexity to be added overtime.
+
+- system is understandable
+- debugging is faster
+
+For example:
+- some things I intend to add: x, y, z
+
+
+---
+
+# Summary (principles)
+
+## takeaways
+
+1. Clarify the specs for planning
+2. Review the implementation
+  - reading the code and testing thoroughly
+3. Document your work
+
 
 ---
 layout: center
 class: text-center
+title: closing
 ---
 
-# Learn More
+## “Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.” 
+-Antoine de Saint-Exupéry
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+
+
+<br /><br /><br />
+
+### Thank you.
+
+<br />
+
+### Questions?
+
