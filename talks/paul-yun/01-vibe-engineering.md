@@ -6,7 +6,7 @@ info: |
   ## Vibe Engineering
   Vibe code like an engineer by Paul Yun
 transition: slide-left
-title: Welcome
+title: Vibe Engineering
 date: 2026-04-28
 ---
 

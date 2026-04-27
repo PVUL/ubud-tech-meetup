@@ -44,19 +44,16 @@ title: What To Expect From Us
 
 # What To Expect From Us
 
-(should ask what the audience expectations of the group is)
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden text-2xl"> 
 
-<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden"> 
-
-- share and educate
+- Networking
 
 </div>
 
-<div v-after class="v-afters">
+<div v-after class="v-afters text-2xl">
 
-- networking
-- tech talks
-- work on community projects together (for learning, fun, and building the community)
+- Tech talks
+- Work on community projects together (for learning, fun, and building community)
 
 </div>
 
@@ -65,15 +62,15 @@ layout: default
 title: Code of Conduct
 ---
 
-# Code of conduct
+# Code of Conduct
 
-<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden">
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden text-2xl">
 
 - Be Kind.
 
 </div>
 
-<div v-after class="v-afters">
+<div v-after class="v-afters text-2xl">
 
 - No Selling.
 - Support Growth in Eachother.
