@@ -6,7 +6,8 @@ import fuzzysort from 'fuzzysort';
 import chalk from 'chalk';
 import enquirer from 'enquirer';
 // @ts-ignore
-import datePrompt from 'date-prompt';
+import datePrompt from './custom-date-prompt.cjs';
+
 // @ts-ignore
 const { Input, Toggle } = enquirer;
 
@@ -397,7 +398,7 @@ async function createNew(): Promise<boolean> {
       '---',
       `theme: seriph`,
       `title: "${talkName.replace(/"/g, '\\"')}"`,
-      dateStr ? `date: "${dateStr}"` : null,
+      dateStr ? `date: ${dateStr}` : null,
       '---',
       '',
       `# ${talkName}`,

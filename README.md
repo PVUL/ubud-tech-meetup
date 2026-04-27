@@ -7,7 +7,7 @@ A meetup for people interested in learning and talking about tech in Ubud, Bali.
 See [2026-04-28.md](/events/2026-04-28.md)
 
 ## Join our WhatsApp group
-<img src="/assets/whatsapp-qr-code.png" width="200">
+<img src="/assets/qr-codes/whatsapp-group.png" width="200">
 https://chat.whatsapp.com/LVtWhe8xGfFFu0qFjp565d?mode=gi_t
 
 ## Why does this group exist?

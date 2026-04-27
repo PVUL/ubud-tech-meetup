@@ -27,9 +27,10 @@ import MeetupLogo from '../../components/MeetupLogo.vue'
 </div>
 
 <MeetupLogo />
+
 <!-- **Tuesday, April 28, 2026** -->
 
-#### _Welcome to our 2nd meetup!_
+## _Welcome to our 2nd meetup!_
 |     |                        |
 |----:|:-----------------------|
 |6:00 | Networking + Food      |
@@ -37,7 +38,9 @@ import MeetupLogo from '../../components/MeetupLogo.vue'
 |7:00 | Tech Talk              |
 |7:30 | Networking             |
 
-<br /><i>— Sponsored by Nhost —</i>
+<div class="mt-12">
+  <i>— Sponsored by Nhost —</i>
+</div>
 
 <style>
 h2 {
@@ -59,21 +62,31 @@ class: text-center
 import Image from '../../components/Image.vue'
 </script>
 
-# About Ubud Tech Meetup
+## About Ubud Tech Meetup
 
+<br />
 <Image src="/photos/2026-04-07.jpg" width="400" />
 
-(Talk about the purpose of Ubud Tech Meetup - "to share and educate")
+<div v-click.fade-in class="slidev-vclick-target mt-6 text-xl italic"> 
+Why We Exist?
+</div>
 
-- Who we are
-- Why this meetup started (maybe get community involvement)
-- Who is it for? (both developers and non-developers - but we want to stay true to our developer roots, while still being accessible to non-developers)
-- github/whatsapp
+<div v-click.fade-in class="slidev-vclick-target mt-3 text-3xl"> 
+To Share and Educate Community Members-<br /> Devs and those into Tech.
+</div>
+
+<style>
+.slidev-vclick-target {
+  transition: all 700ms ease-in-out;
+}
+</style>
+
+<!-- - Who is it for? (both developers and non-developers - but we want to stay true to our developer roots, while still being accessible to non-developers)
+- github/whatsapp -->
 
 
 ---
 transition: slide-up
-level: 2
 ---
 
 # What To Expect From Us
@@ -134,13 +147,23 @@ layout: default
 
 
 ---
+class: text-center
+---
 
-# Call for community tech talks
-Call for community members to give talks (reach out to Paul)
+<script setup lang="ts">
+import Image from '../../components/Image.vue'
+</script>
 
-show qr code (google form) - also to share in whatsapp.
+# Call for Community Tech Talks
+### We're looking for community members who are interested
+### in sharing and educating our tech community
 
-(should mention the process of submitting a talk, and the 2 talk formats, 15 min tech talk or 60 min workshop)
+<br />
+<br />
+
+<Image src="/qr-codes/call-for-talks.png" width="200" />
+https://tally.so/r/RGZb6J
+
 
 ---
 class: px-20

@@ -13,6 +13,13 @@
  * This component provides a centralized way to handle image paths, ensuring 
  * that assets (especially those in the public/ directory) are resolved 
  * correctly regardless of where the slide is located.
+ * 
+ * Example use:
+ * 
+ *    import Image from '~/components/Image.vue'
+ * 
+ *    <Image src="/photos/2026-04-07.jpg" width="400" />
+ *   
  */
 import { computed } from 'vue'
 
