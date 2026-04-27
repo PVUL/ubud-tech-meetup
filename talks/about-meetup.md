@@ -66,14 +66,14 @@ title: Code of Conduct
 
 <div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden text-2xl">
 
-- Be Kind.
+- Be Kind
 
 </div>
 
 <div v-after class="v-afters text-2xl">
 
-- No Selling.
-- Support Growth in Eachother.
+- No Selling
+- Support Growth in Eachother
 
 </div>
 

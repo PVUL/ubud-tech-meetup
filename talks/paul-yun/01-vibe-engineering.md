@@ -55,11 +55,8 @@ layout: center
 title: Thank you
 ---
 
-<div text-align="center">
-  <h2>Thank you.</h2><br />
-  <h3 color="gray" italic>And now to for main talk...</h3>
-</div>
-
+<h2>Thank you.</h2><br />
+<h3 color="gray" italic>And now to for main talk...</h3>
 
 ---
 layout: cover
@@ -118,39 +115,25 @@ transition: fade-out
 
 # Why?
 
-Because without a proper approach: 
-- Vibe coding can limit the complexity of what you can build
-- You'll likely spend more time and tokens re-iterating
-- It becomes easy to lose focus of original intent
+Because with an engineering mindset:
 
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden text-2xl">
+  
+  - You can build more complex projects
+
+</div>
+
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden text-2xl">
+
+  - Systematize your process
+
+</div>
 
 ---
 layout: center
 ---
 
-## So how can we apply concepts from **_engineering_**?
-
-<!-- 
-* Building with AI using an engineering mindset
-* Structured, not reactive
-* Focused on systems that last -->
-
-<!-- 
-- It's using the approach of vibe coding, but with a systematic engineering approach.
-- Why? 
-  - (1) it allows you to have better consistency over the quality of outputs. 
-  - (2) it allows you to build more complex systems.
-
-- STEPS
-  - Clarify the specs
-    - research (libraries, frameworks, etc)
-    - design (UI, UX, architecture, etc)
-    - create a clear prompt
-  - Verify the implementation plan
-    - implement
-    - test
-  - Add documentation
-    - this provides context for future development (human or non-human) -->
+## So how can we start **_engineering_**?
 
 ---
 
@@ -210,18 +193,17 @@ layout: center
 layout: center
 ---
 
-<!-- # What can do better. (the shift) -->
-
-<!-- we're in a mad dash to finish quickly because it feels good. but when it's not done right, we actually spend more time fixing it. -->
-
 _The approach._
 
 ## "Measure twice, cut once"
 
+<br /><br />
 
 ---
+layout: two-cols
+---
 
-# Vibe Engineering Workflow
+# I. Workflow
 
 - 1. Plan
   - 1.1 Clarify the spec
@@ -239,25 +221,53 @@ _The approach._
   - 3.1 Test
   - 3.2 Document
 
+::right::
+
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden">
+  <h1>II. Process Improvement</h1>
+  <ul>
+    <li>
+      A. Artifact Curation
+    </li>
+    <ul class="ml-5">
+      <li>
+        A.1 Specs, Docs, Opportunities, Decicisions, etc.
+      </li>
+    </ul>
+    <br />
+    <li>
+      B. Agentic Skills
+    </li>
+        <ul class="ml-5">
+      <li>
+        B.1 Workflow Optimization
+      </li>
+      <li>
+        B.2 Consistent Opportunities Discovery
+      </li>
+    </ul>
+  </ul>
+</div>
+
 ---
 
-# workflow overview: clarify spec
+# Workflow: Plan
 
 ---
 
-# workflow overview: plan
+# Workflow: Implement
 
 ---
 
-# workflow overview: implement
+# Workflow: Review
 
 ---
 
-# workflow overview: debug
+# Process Improvement: Artifact Curation
 
 ---
 
-# workflow overview: document
+# Process Improvement: Agentic Skills
 
 ---
 
@@ -267,45 +277,47 @@ _The approach._
 
 - general overview of the project
   - why
-  - what is the stack
+
+(screenshot)
 
 ---
 
 # Demo time
 
-(next 3-4 slides for walk thru of how it was built)
+(next 2-3 slides for walk thru of how it was built)
 
----
-
-# if i vibe coded this without specs
-
-(show screenshot of prompt)
-
+(and the opportunities I discovered using agentic skills + artifacts + agent skills updates)
 
 ---
 
 # Result
 
-This allows for more complexity to be added overtime.
+Using the engineering approach:
 
-- system is understandable
-- debugging is faster
+- Can build complex architectures, allowing me to focus on product
+- Still not perfect, but I wrestle with AI less now
 
-For example:
-- some things I intend to add: x, y, z
+<br />
 
+<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden">
+
+_Next implementations:_
+
+- Zustand (manage UI state) and DrizzleORM (type-safe queries)
+- Testing Strategy
+- Cloudflare Workers + Durable Objects (sync layer)
+
+</div>
 
 ---
+layout: center
+---
 
-# Summary (principles)
+_Takeaways._
+<h2>1. Clarify specs for planning.</h2><br />
+<h2>2. Think in systems for process improvement.</h2>
 
-## takeaways
-
-1. Clarify the specs for planning
-2. Review the implementation
-  - reading the code and testing thoroughly
-3. Document your work
-
+<br /><br />
 
 ---
 layout: center
@@ -313,21 +325,22 @@ class: text-center
 title: closing
 ---
 
-## “Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.” 
--Antoine de Saint-Exupéry
+## “Perfection is achieved, 
+## not when there is nothing more to add, 
+## but when there is **_nothing left_** to take away.” 
+<span class="mt-10 italic text-right">Antoine de Saint-Exupéry</span>
 
-
-
-<br /><br /><br />
 ---
-layout: cover
+layout: center
 ---
 
-### Thank you.
+#### Thank you.
 
 <br />
 
 ## Questions?
+
+<br />
 
 ---
 src: ../about-meetup.md#1 # Logo
