@@ -12,6 +12,9 @@ import datePrompt from './custom-date-prompt.cjs';
 const { Input, Toggle } = enquirer;
 
 const talksDir = 'talks';
+
+// Files in the root of talksDir to hide from the TUI (e.g. shared partials, demo, etc.)
+const EXCLUDED_TALKS = new Set(['demo.md', 'about-meetup.md']);
 const configFile = '.config.json';
 
 const titleTemplates = [
@@ -95,7 +98,7 @@ function getAllFiles(dir: string, base: string = ''): { path: string; display: s
     if (item.isDirectory()) {
       results = results.concat(getAllFiles(absPath, relPath));
     } else if (item.name.endsWith('.md')) {
-      if (base === '' && item.name === 'demo.md') continue;
+      if (base === '' && EXCLUDED_TALKS.has(item.name)) continue;
       const meta = getSlidevMetadata(absPath);
       if (meta.isSlidev) {
         results.push({
@@ -138,7 +141,7 @@ function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): T
         items.push(...buildFilteredTree(absPath, allowedPaths, depth + 1));
       }
     } else if (item.name.endsWith('.md')) {
-      if (depth === 0 && item.name === 'demo.md') continue;
+      if (depth === 0 && EXCLUDED_TALKS.has(item.name)) continue;
       const meta = getSlidevMetadata(absPath);
       if (meta.isSlidev && allowedPaths.has(absPath)) {
         items.push({
@@ -372,6 +375,7 @@ async function createNew(): Promise<boolean> {
     if (!fs.existsSync(speakerDir)) {
       fs.mkdirSync(speakerDir, { recursive: true });
     }
+    ensureStylesRelay(speakerDir);
 
     // Auto-increment numbering: find the highest number in the directory
     let nextNum = 1;
@@ -433,6 +437,19 @@ async function createNew(): Promise<boolean> {
   }
 }
 
+/**
+ * Ensures talks/{speaker}/styles/index.css exists and imports the root stylesheet.
+ * Slidev resolves styles/ relative to the entry .md file, so each speaker dir
+ * needs this relay to pick up the project-level global CSS.
+ */
+function ensureStylesRelay(speakerDir: string) {
+  const relayFile = path.join(speakerDir, 'style.css');
+  if (!fs.existsSync(relayFile)) {
+    // Depth from speakerDir to project root is always 2 levels up (talks/{speaker}/ -> ../..)
+    fs.writeFileSync(relayFile, '/* Import global styles from project root */\n@import \'../../styles/index.css\';\n');
+  }
+}
+
 function launchSlidev(filePath: string) {
   // Save last opened as relative path (excluding 'talks/')
   const config = getConfig();
@@ -447,6 +464,9 @@ function launchSlidev(filePath: string) {
   process.stdin.pause();
   process.stdin.setRawMode(false);
   process.stdout.write('\x1B[H\x1B[J');
+
+  // Ensure the styles relay exists for this talk's speaker directory
+  ensureStylesRelay(path.dirname(filePath));
 
   const slidevBin = path.join(process.cwd(), 'node_modules', '.bin', 'slidev');
   const child = spawn(slidevBin, [filePath], { stdio: 'inherit' });

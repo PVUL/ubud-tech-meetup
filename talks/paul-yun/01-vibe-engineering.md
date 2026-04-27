@@ -1,34 +1,25 @@
 ---
-# try also 'default' to start simple
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cdn.jsdelivr.net/gh/slidevjs/slidev-covers@main/static/4Zfx5NRt8pM.webp
-# apply any unocss classes to the current slide
 class: "text-center"
-# some information about the slides, markdown enabled
 info: |
   ## Vibe Engineering
   Vibe code like an engineer by Paul Yun
-
 transition: slide-left
 title: Welcome
-comark: true
 date: 2026-04-28
 ---
 
 <script setup lang="ts">
 import Timer from '../../components/Timer.vue'
-import MeetupLogo from '../../components/MeetupLogo.vue'
+import Logo from '../../components/Logo.vue'
 </script>
 
 <div class="abs-tr m-6">
   <Timer title="Networking" />
 </div>
 
-<MeetupLogo />
-
-<!-- **Tuesday, April 28, 2026** -->
+<Logo />
 
 ## _Welcome to our 2nd meetup!_
 |     |                        |
@@ -53,117 +44,10 @@ table {
 }
 </style>
 
----
-transition: fade-out
-class: text-center
----
-
-<script setup lang="ts">
-import Image from '../../components/Image.vue'
-</script>
-
-## About Ubud Tech Meetup
-
-<br />
-<Image src="/photos/2026-04-07.jpg" width="400" />
-
-<div v-click.fade-in class="slidev-vclick-target mt-6 text-xl italic"> 
-Why We Exist?
-</div>
-
-<div v-click.fade-in class="slidev-vclick-target mt-3 text-3xl"> 
-To Share and Educate Community Members-<br /> Devs and those into Tech.
-</div>
-
-<style>
-.slidev-vclick-target {
-  transition: all 700ms ease-in-out;
-}
-</style>
-
-<!-- - Who is it for? (both developers and non-developers - but we want to stay true to our developer roots, while still being accessible to non-developers)
-- github/whatsapp -->
-
 
 ---
-transition: slide-up
+src: ../about-meetup.md#2-5
 ---
-
-# What To Expect From Us
-
-(should ask what the audience expectations of the group is)
-
-<div v-click.fade-in class="slidev-vclick-target slidev-vclick-hidden"> 
-
-- share and educate
-
-</div>
-
-<div v-after class="v-afters">
-
-- networking
-- tech talks
-- work on community projects together (for learning, fun, and building the community)
-
-</div>
-
-<style>
-.slidev-vclick-target {
-  transition: all 700ms ease-in-out;
-}
-
-/* v-afters container logic */
-.v-afters li {
-  opacity: 0;
-  transition: all 700ms ease-in-out;
-}
-
-.v-afters:not(.slidev-vclick-hidden) li {
-  opacity: 1;
-}
-
-/* Automatic staggering for up to 10 items (Forward only) */
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(1) { transition-delay: 700ms !important; }
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(2) { transition-delay: 1400ms !important; }
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(3) { transition-delay: 2100ms !important; }
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(4) { transition-delay: 2800ms !important; }
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(5) { transition-delay: 3500ms !important; }
-.slidev-nav-go-forward .v-afters:not(.slidev-vclick-hidden) li:nth-child(6) { transition-delay: 4200ms !important; }
-
-/* Instant reset when going backward */
-.slidev-nav-go-backward .v-afters li {
-  transition-delay: 0ms !important;
-}
-</style>
-
-
----
-layout: default
----
-
-# Code of conduct
-
-- Code of conduct / values
-
-
----
-class: text-center
----
-
-<script setup lang="ts">
-import Image from '../../components/Image.vue'
-</script>
-
-# Call for Community Tech Talks
-### We're looking for community members who are interested
-### in sharing and educating our tech community
-
-<br />
-<br />
-
-<Image src="/qr-codes/call-for-talks.png" width="200" />
-https://tally.so/r/RGZb6J
-
 
 ---
 class: px-20
@@ -172,7 +56,7 @@ title: Thank you
 ---
 
 <div text-align="center">
-  <h1>Thank you.</h1><br />
+  <h2>Thank you.</h2><br />
   <h3 color="gray" italic>And now to for main talk...</h3>
 </div>
 
@@ -256,7 +140,6 @@ layout: center
 - Why? 
   - (1) it allows you to have better consistency over the quality of outputs. 
   - (2) it allows you to build more complex systems.
-
 
 - STEPS
   - Clarify the specs
@@ -436,10 +319,16 @@ title: closing
 
 
 <br /><br /><br />
+---
+layout: cover
+---
 
 ### Thank you.
 
 <br />
 
-### Questions?
+## Questions?
 
+---
+src: ../about-meetup.md#1 # Logo
+---
