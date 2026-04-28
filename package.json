@@ -4,8 +4,7 @@
     "dev": "slidev-workspace preview",
     "build": "slidev-workspace build",
     "export-og": "slidev-workspace export-og",
-    "select": "bun scripts/select-presentation.ts",
-    "export": "slidev export"
+    "select": "bun scripts/select-presentation.ts"
   },
   "dependencies": {
     "slidev-workspace": "^0.9.3"
