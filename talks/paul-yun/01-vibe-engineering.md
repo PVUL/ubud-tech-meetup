@@ -371,39 +371,119 @@ flowchart LR
 </style>
 
 ---
-
-# Workflow: Implement
-
----
-
-# Workflow: Review
-
----
-
-# Process Improvement: Artifact Curation
-
+layout: center
 ---
 
 # Process Improvement: Agentic Skills
 
+<div class="grid grid-cols-2 gap-10 mt-10">
+  <div v-click>
+    <h3 class="text-primary mb-4 uppercase tracking-widest text-sm font-bold">What?</h3>
+    <p class="text-lg leading-relaxed opacity-90">
+      <b>Codified Expertise.</b> Reusable, versioned instructions (e.g., <code>SKILL.md</code>) that define specific agent behaviors. 
+    </p>
+    <p class="text-sm opacity-60 mt-2">
+      Moving from <i>ephemeral prompts</i> to <i>modular systems</i>.
+    </p>
+  </div>
+  <div v-click>
+    <h3 class="text-primary mb-4 uppercase tracking-widest text-sm font-bold">Why?</h3>
+    <ul class="space-y-4 list-none p-0">
+      <li class="flex items-start gap-3">
+        <div class="mt-3 w-2 h-2 rounded-full bg-primary shrink-0" />
+        <div><b>Consistency:</b> Enforce engineering rigor by default.</div>
+      </li>
+      <li class="flex items-start gap-3">
+        <div class="mt-3 w-2 h-2 rounded-full bg-primary shrink-0" />
+        <div><b>Scaling:</b> Automate complex architectural reviews.</div>
+      </li>
+      <li class="flex items-start gap-3">
+        <div class="mt-3 w-2 h-2 rounded-full bg-primary shrink-0" />
+        <div><b>Evolution:</b> Your process improves as your skills repo grows.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div v-click class="mt-10">
+  <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-4 font-bold text-center">Examples from this talk</div>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="skill-card">
+      <div class="skill-card-tab">SKILL.md</div>
+      <div class="skill-card-name">clarify-specs</div>
+      <div class="skill-card-desc">Stress-test a plan via relentless questioning until shared understanding.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-tab">SKILL.md</div>
+      <div class="skill-card-name">improve-codebase-architecture</div>
+      <div class="skill-card-desc">Surface refactor opportunities, guided by ADRs and domain context.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-tab">SKILL.md</div>
+      <div class="skill-card-name">caveman</div>
+      <div class="skill-card-desc">Ultra-compressed comms — cuts token usage ~75% while keeping accuracy.</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.skill-card {
+  position: relative;
+  padding: 1rem 1rem 0.9rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.skill-card-tab {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.skill-card-name {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0f3460;
+  word-break: break-word;
+}
+.skill-card-desc {
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: #475569;
+}
+</style>
 ---
 
-# Here's my project (real world example)
+# My project: `Aspire.You`
+<br />
 
-## Aspire.you
+#### _Aspire.You_ is a community platform for user-focused personal growth
 
-- general overview of the project
-  - why
+<img class="m-auto rounded-2xl mt-12" src="/assets/01-vibe-engineering-2.png" width="700">
 
-(screenshot)
-
+---
+layout: cover
 ---
 
 # Demo time
 
-(next 2-3 slides for walk thru of how it was built)
+<div class="mt-12">
 
-(and the opportunities I discovered using agentic skills + artifacts + agent skills updates)
+<span italic>and the opportunities I discovered using: </span>
+<br /><br />
+<span>- agentic skills</span>
+<br />
+<span>- artifacts</span>
+<br />
+<span>- agent skills updates</span>
+
+</div>
 
 ---
 
@@ -431,8 +511,8 @@ layout: center
 ---
 
 _Takeaways._
-<h2>1. Clarify specs for planning.</h2><br />
-<h2>2. Think in systems for process improvement.</h2>
+<h2>1. Clarify specs for planning</h2><br />
+<h2>2. Think in systems for process improvement</h2>
 
 <br /><br />
 
