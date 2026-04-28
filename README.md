@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/assets/logo/logo-white-solid-black-bg.png" width="175">
+  <img src="/assets/logo/logo-white-solid-black-bg.png" width="200">
 </p>
 
 # Ubud Tech Meetup
