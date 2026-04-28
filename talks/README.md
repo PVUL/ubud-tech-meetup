@@ -62,7 +62,6 @@ The talk date can be skipped during creation, but it is recommended that date ge
 
 ```yaml
 ---
-theme: seriph
 title: "My Amazing Talk"
 date: "2026-04-17" # Add/Edit this line manually
 ---
