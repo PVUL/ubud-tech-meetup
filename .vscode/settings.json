@@ -2,7 +2,7 @@
   "slidev.include": [
     "talks/**/*.md"
   ],
-  "slidev.exclude": "talks/README.md",
+  "slidev.exclude": "talks/{README.md,about-meetup.md}",
   "[markdown]": {
     // use vscode markdown formatter not prettier
     "editor.defaultFormatter": "vscode.markdown-language-features"
