@@ -11,8 +11,8 @@ date: 2026-04-28
 ---
 
 <script setup lang="ts">
-import Timer from '../../components/Timer.vue'
-import Logo from '../../components/Logo.vue'
+import Timer from '../../../components/Timer.vue'
+import Logo from '../../../components/Logo.vue'
 </script>
 
 <div class="abs-tr m-6">
@@ -54,7 +54,7 @@ layout: cover
 
 
 ---
-src: ../about-meetup.md#2-5
+src: ../../about-meetup.md#2-5
 ---
 
 ---
@@ -88,7 +88,7 @@ title: About Me
 
 
 <h2 class="ml-17">Hi, I'm Paul Yun.</h2><br /><br />
-<img class="m-auto" src="/assets/01-vibe-engineering-1.JPG" width="300"><br />
+<img class="m-auto" :src="profileImg" width="300"><br />
 
 ::right::
 
@@ -99,7 +99,8 @@ title: About Me
 - From Philadelphia + I love skateboarding 🛹
 
 <script setup lang="ts">
-import SocialHandle from '../../components/SocialHandle.vue'
+import SocialHandle from '../../../components/SocialHandle.vue'
+import profileImg from '../assets/01-vibe-engineering-1.jpg'
 </script>
 
 <br /><br />
@@ -465,7 +466,7 @@ layout: center
 
 #### _Aspire.You_ is a community platform for user-focused personal growth
 
-<img class="m-auto rounded-2xl mt-12" src="/assets/01-vibe-engineering-2.png" width="700">
+<img class="m-auto rounded-2xl mt-12" :src="aspireImg" width="700">
 
 ---
 layout: cover
@@ -540,5 +541,6 @@ layout: center
 <br />
 
 ---
-src: ../about-meetup.md#1 # Logo
+src: ../../about-meetup.md#1 # Logo
 ---
+

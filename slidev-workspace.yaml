@@ -1,0 +1,16 @@
+baseUrl: /ubud-tech-meetup
+
+slidesDir:
+  - ./talks
+
+hero:
+  title: Ubud Tech Meetup
+  description: Browse all available slide decks from the Ubud Tech Meetup community
+
+sidebar:
+  title: Ubud Tech Meetup
+  githubUrl: "https://github.com/PVUL/ubud-tech-meetup"
+
+exclude:
+  - demo
+  - about-meetup

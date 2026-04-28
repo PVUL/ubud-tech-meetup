@@ -1,8 +1,17 @@
 {
   "slidev.include": [
-    "talks/**/*.md"
+    "talks/*.md",
+    "talks/*/*/*.md"
   ],
-  "slidev.exclude": "talks/{README.md,about-meetup.md}",
+  "slidev.exclude": "**/{README.md,about-meetup.md,slides.md}",
+  "files.exclude": {
+    "talks/**/node_modules": true,
+    "talks/**/**/slides.md": true
+  },
+  "search.exclude": {
+    "talks/**/node_modules": true,
+    "talks/**/**/slides.md": true
+  },
   "[markdown]": {
     // use vscode markdown formatter not prettier
     "editor.defaultFormatter": "vscode.markdown-language-features"

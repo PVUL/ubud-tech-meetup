@@ -1,0 +1,13 @@
+{
+  "name": "paul-yun",
+  "private": true,
+  "scripts": {
+    "dev": "slidev 01-vibe-engineering.md",
+    "build": "slidev build 01-vibe-engineering.md --out dist",
+    "export": "slidev export 01-vibe-engineering.md"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.14.2",
+    "@slidev/theme-seriph": "^0.25.0"
+  }
+}
