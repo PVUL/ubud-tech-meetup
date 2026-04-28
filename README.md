@@ -1,6 +1,6 @@
-<div style="text-align: center;">
-<img src="/assets/logo/logo-white-solid-black-bg.png" width="300">
-</div>
+<p align="center">
+  <img src="/assets/logo/logo-white-solid-black-bg.png" width="250">
+</p>
 
 # Ubud Tech Meetup
 A meetup for people interested in learning and talking about tech in Ubud, Bali.
