@@ -380,7 +380,7 @@ layout: center
   <div v-click>
     <h3 class="text-primary mb-4 uppercase tracking-widest text-sm font-bold">What?</h3>
     <p class="text-lg leading-relaxed opacity-90">
-      <b>Codified Expertise.</b> Reusable, versioned instructions (e.g., <code>SKILL.md</code>) that define specific agent behaviors. 
+      <b>Agents with power tools.</b> Reusable, versioned instructions (e.g., <code>SKILL.md</code>) that define specific agent behaviors. 
     </p>
     <p class="text-sm opacity-60 mt-2">
       Moving from <i>ephemeral prompts</i> to <i>modular systems</i>.
@@ -406,7 +406,7 @@ layout: center
 </div>
 
 <div v-click class="mt-10">
-  <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-4 font-bold text-center">Examples from this talk</div>
+  <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-4 font-bold text-center">Skill Examples:</div>
   <div class="grid grid-cols-3 gap-4">
     <div class="skill-card">
       <div class="skill-card-tab">SKILL.md</div>
