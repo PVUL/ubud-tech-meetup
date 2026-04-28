@@ -1,7 +1,7 @@
 # Ubud Tech Meetup
 A meetup for people interested in learning and talking about tech in Ubud, Bali.
 
-<img src="/assets/logo/logo-black-outline-white-bg.png" width="400">
+<img src="/assets/logo/logo-white-solid-black-bg.png" width="350">
 
 ## Next Meetup
 See [2026-04-28.md](/events/2026-04-28.md)
