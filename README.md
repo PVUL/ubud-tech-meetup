@@ -6,7 +6,7 @@
 A meetup for people interested in learning and talking about tech in Ubud, Bali.
 
 ## Next Meetup
-See [2026-04-28.md](/events/2026-04-28.md)
+See [2026-05-26.md](/events/2026-05-26.md)
 
 ## Join our WhatsApp group
 <img src="/assets/qr-codes/whatsapp-group.png" width="200">
