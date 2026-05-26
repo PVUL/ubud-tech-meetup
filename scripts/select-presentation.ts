@@ -57,7 +57,7 @@ function saveConfig(config: any) {
 // --- File Discovery ---
 
 function formatLabel(label: string, isLastOpened = false): string {
-  if (!label || label === '[NEW TALK]' || label === '[SEE DEMO]') return label;
+  if (!label || label === '[NEW TALK]' || label === '[SEE DEMO]' || label === '[OPEN SLIDES GALLERY]') return label;
   const separator = isLastOpened ? ' - ' : ' / ';
   return label
     .split('/')
@@ -96,7 +96,15 @@ function getAllFiles(dir: string, base: string = ''): { path: string; display: s
     const relPath = path.join(base, item.name);
     const absPath = path.join(dir, item.name);
     if (item.isDirectory()) {
-      results = results.concat(getAllFiles(absPath, relPath));
+      const mainFile = path.join(absPath, `${item.name}.md`);
+      if (fs.existsSync(mainFile)) {
+        const meta = getSlidevMetadata(mainFile);
+        if (meta.isSlidev) {
+          results.push({ path: mainFile, display: relPath, date: meta.date });
+        }
+      } else {
+        results = results.concat(getAllFiles(absPath, relPath));
+      }
     } else if (item.name.endsWith('.md')) {
       if (base === '' && EXCLUDED_TALKS.has(item.name)) continue;
       const meta = getSlidevMetadata(absPath);
@@ -133,12 +141,20 @@ function buildFilteredTree(dir: string, allowedPaths: Set<string>, depth = 0): T
     const absPath = path.join(dir, item.name);
 
     if (item.isDirectory()) {
-      const children = getAllFiles(absPath);
-      const hasAllowedChild = children.some(c => allowedPaths.has(c.path));
+      const mainFile = path.join(absPath, `${item.name}.md`);
+      if (fs.existsSync(mainFile)) {
+        if (allowedPaths.has(mainFile)) {
+          const meta = getSlidevMetadata(mainFile);
+          items.push({ title: item.name, path: mainFile, isDir: false, depth, date: meta.date });
+        }
+      } else {
+        const children = getAllFiles(absPath);
+        const hasAllowedChild = children.some(c => allowedPaths.has(c.path));
 
-      if (hasAllowedChild) {
-        items.push({ title: item.name, path: absPath, isDir: true, depth });
-        items.push(...buildFilteredTree(absPath, allowedPaths, depth + 1));
+        if (hasAllowedChild) {
+          items.push({ title: item.name, path: absPath, isDir: true, depth });
+          items.push(...buildFilteredTree(absPath, allowedPaths, depth + 1));
+        }
       }
     } else if (item.name.endsWith('.md')) {
       if (depth === 0 && EXCLUDED_TALKS.has(item.name)) continue;
@@ -166,6 +182,7 @@ const allFilesIndex = getAllFiles(talksDir);
 
 function updateState() {
   items = [];
+
   const config = getConfig();
   const lastOpenedPath = config['last-opened-path'];
   const absLastOpened = lastOpenedPath
@@ -175,7 +192,12 @@ function updateState() {
   if (!searchText && absLastOpened && fs.existsSync(absLastOpened) && lastOpenedPath !== 'demo.md') {
     const meta = getSlidevMetadata(absLastOpened);
     // Determine relative path for display: should be person/file
-    const rel = path.relative(path.join(process.cwd(), talksDir), absLastOpened).replace('.md', '');
+    let rel = path.relative(path.join(process.cwd(), talksDir), absLastOpened).replace('.md', '');
+    const parts = rel.split(path.sep);
+    if (parts.length >= 2 && parts[parts.length - 1] === parts[parts.length - 2]) {
+      parts.pop();
+      rel = parts.join('/');
+    }
 
     items.push({
       title: rel,
@@ -185,8 +207,10 @@ function updateState() {
       depth: 0,
       date: meta.date
     });
-    items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
   }
+
+  items.push({ title: '[OPEN SLIDES GALLERY]', path: 'OPEN_SLIDES_GALLERY', isDir: false, depth: 0 });
+  items.push({ title: '', path: '__SPACER__', isDir: true, isSpacer: true, depth: 0 });
 
   if (searchText) {
     const results = fuzzysort.go(searchText, allFilesIndex, { keys: ['display', 'date'], limit: 50 });
@@ -289,7 +313,10 @@ async function handleKeypress(chunk: any, key: any) {
   } else if (key.name === 'return') {
     const selected = items[selectedIndex];
     if (selected) {
-      if (selected.path === 'CREATE_NEW') {
+      if (selected.path === 'OPEN_SLIDES_GALLERY') {
+        launchGallery();
+        return;
+      } else if (selected.path === 'CREATE_NEW') {
         if (await createNew()) return;
       } else if (selected.path === 'SEE_DEMO') {
         launchSlidev(path.join(process.cwd(), talksDir, 'demo.md'));
@@ -444,9 +471,17 @@ async function createNew(): Promise<boolean> {
  */
 function ensureStylesRelay(speakerDir: string) {
   const relayFile = path.join(speakerDir, 'style.css');
-  if (!fs.existsSync(relayFile)) {
-    // Depth from speakerDir to project root is always 2 levels up (talks/{speaker}/ -> ../..)
-    fs.writeFileSync(relayFile, '/* Import global styles from project root */\n@import \'../../styles/index.css\';\n');
+  const projectRoot = process.cwd();
+  const stylesIndex = path.join(projectRoot, 'styles', 'index.css');
+  
+  let relPath = path.relative(speakerDir, stylesIndex).split(path.sep).join('/');
+  if (!relPath.startsWith('.')) {
+    relPath = './' + relPath;
+  }
+  
+  const content = `/* Import global styles from project root */\n@import '${relPath}';\n`;
+  if (!fs.existsSync(relayFile) || fs.readFileSync(relayFile, 'utf-8') !== content) {
+    fs.writeFileSync(relayFile, content);
   }
 }
 
@@ -470,6 +505,19 @@ function launchSlidev(filePath: string) {
 
   const slidevBin = path.join(process.cwd(), 'node_modules', '.bin', 'slidev');
   const child = spawn(slidevBin, [filePath], { stdio: 'inherit' });
+
+  child.on('exit', () => process.exit(0));
+}
+
+function launchGallery() {
+  process.stdin.removeListener('keypress', handleKeypress);
+  process.stdin.removeAllListeners('data');
+  process.stdin.pause();
+  process.stdin.setRawMode(false);
+  process.stdout.write('\x1B[H\x1B[J');
+
+  const slidevWorkspaceBin = path.join(process.cwd(), 'node_modules', '.bin', 'slidev-workspace');
+  const child = spawn(slidevWorkspaceBin, ['dev'], { stdio: 'inherit' });
 
   child.on('exit', () => process.exit(0));
 }

@@ -27,13 +27,13 @@ import Image from '../components/Image.vue'
 ## About Ubud Tech Meetup
 
 <br />
-<Image src="/photos/2026-04-07.jpg" width="400" />
+<Image src="/photos/2026-04-28.jpg" width="600" />
 
-<div v-click.fade-in class="slidev-vclick-target mt-6 text-xl italic"> 
+<div class="slidev-vclick-target mt-6 text-xl italic"> 
 Why We Exist?
 </div>
 
-<div v-click.fade-in class="slidev-vclick-target mt-3 text-3xl"> 
+<div class="slidev-vclick-target mt-3 text-3xl"> 
 To Share and Educate Community Members-<br /> Devs, Designers + Tech Enthusiasts
 </div>
 

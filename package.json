@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "slidev-workspace preview",
+    "dev": "bun scripts/select-presentation.ts",
     "build": "slidev-workspace build",
     "export-og": "slidev-workspace export-og",
     "select": "bun scripts/select-presentation.ts"
